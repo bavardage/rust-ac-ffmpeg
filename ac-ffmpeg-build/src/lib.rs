@@ -44,7 +44,7 @@ cfg_if::cfg_if! {
         fn find_ffmpeg_lib() -> Option<Library> {
             Config::new()
                 // .cargo_metadata(false)
-                .probe("libavcodec")
+                .probe("libavformat")
                 .ok()
         }
     } else if #[cfg(target_os = "windows")] {
