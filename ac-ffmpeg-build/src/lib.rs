@@ -43,8 +43,8 @@ cfg_if::cfg_if! {
         /// Find a given library using pkg-config.
         fn find_ffmpeg_lib() -> Option<Library> {
             Config::new()
-                .cargo_metadata(false)
-                .probe("libavcodec")
+                // .cargo_metadata(false)
+                .probe("libavformat")
                 .ok()
         }
     } else if #[cfg(target_os = "windows")] {
