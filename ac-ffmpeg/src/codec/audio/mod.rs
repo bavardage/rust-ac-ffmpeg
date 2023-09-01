@@ -512,6 +512,10 @@ impl Encoder for AudioEncoder {
     }
 
     fn try_push(&mut self, frame: AudioFrame) -> Result<(), CodecError> {
+        if frame.samples() == 0 {
+            return Ok(())
+        }
+
         let frame = frame.with_time_base(self.time_base);
 
         unsafe {
