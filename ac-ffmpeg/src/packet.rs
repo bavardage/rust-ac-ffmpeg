@@ -392,14 +392,14 @@ impl Packet {
     }
 
     /// Get raw pointer.
-    pub(crate) fn as_ptr(&self) -> *const c_void {
+    pub fn as_ptr(&self) -> *const c_void {
         self.ptr
     }
 
     /// Get mutable raw pointer. Please note that even though it is required
     /// in some cases to pass a mut pointer to an immutable packet, it is not
     /// allowed to modify packet data in such cases.
-    pub(crate) fn as_mut_ptr(&mut self) -> *mut c_void {
+    pub fn as_mut_ptr(&mut self) -> *mut c_void {
         self.ptr
     }
 
