@@ -88,12 +88,12 @@ pub struct PixelFormat(c_int);
 
 impl PixelFormat {
     /// Create a pixel format value from a given raw representation.
-    pub(crate) fn from_raw(v: c_int) -> Self {
+    pub fn from_raw(v: c_int) -> Self {
         Self(v)
     }
 
     /// Get the raw value.
-    pub(crate) fn into_raw(self) -> c_int {
+    pub fn into_raw(self) -> c_int {
         let Self(format) = self;
 
         format
