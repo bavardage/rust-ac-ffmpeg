@@ -469,7 +469,7 @@ pub struct VideoFrame {
 
 impl VideoFrame {
     /// Create a new video frame from its raw representation.
-    pub(crate) unsafe fn from_raw_ptr(ptr: *mut c_void, time_base: TimeBase) -> Self {
+    pub unsafe fn from_raw_ptr(ptr: *mut c_void, time_base: TimeBase) -> Self {
         Self { ptr, time_base }
     }
 
@@ -541,7 +541,7 @@ impl VideoFrame {
     }
 
     /// Get raw pointer.
-    pub(crate) fn as_ptr(&self) -> *const c_void {
+    pub fn as_ptr(&self) -> *const c_void {
         self.ptr
     }
 
