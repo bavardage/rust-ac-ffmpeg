@@ -3,7 +3,7 @@
 use std::{
     borrow::{Borrow, BorrowMut},
     convert::TryInto,
-    ffi::{CString, CStr},
+    ffi::{CStr, CString},
     io::Read,
     ops::{Deref, DerefMut},
     os::raw::{c_char, c_int, c_uint, c_void},
@@ -42,6 +42,8 @@ extern "C" {
         value: *const c_char,
     ) -> c_int;
     fn ffw_demuxer_find_stream_info(demuxer: *mut c_void, max_analyze_duration: i64) -> c_int;
+    fn ffw_demuxer_get_bit_rate(demuxer: *const c_void) -> c_int;
+    fn ffw_demuxer_get_duration(demuxer: *const c_void) -> c_int;
     fn ffw_demuxer_get_nb_streams(demuxer: *const c_void) -> c_uint;
     fn ffw_demuxer_get_stream(demuxer: *mut c_void, index: c_uint) -> *mut c_void;
     fn ffw_demuxer_get_input_format(demuxer: *const c_void) -> *const c_void;
@@ -332,6 +334,18 @@ impl<T> Demuxer<T> {
         };
 
         Ok(res)
+    }
+
+    pub fn get_bit_rate(&self) -> Result<i32, Error> {
+        let ret = unsafe { ffw_demuxer_get_bit_rate(self.ptr) };
+
+        Ok(ret)
+    }
+
+    pub fn get_duration(&self) -> Result<i32, Error> {
+        let ret = unsafe { ffw_demuxer_get_duration(self.ptr) };
+
+        Ok(ret)
     }
 
     pub fn input_format(&self) -> InputFormat {
